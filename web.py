@@ -25,12 +25,12 @@ def add_newtodo():
 checkbox_counter = 1
 for todo in todo_list:
     checkbox = st.checkbox(todo, key=f"{checkbox_counter}_{todo}")
-    checkbox_counter += 1
     if checkbox:
         todo_list.remove(todo)
         fun.write_todos("w", todo_list)
-        del st.session_state[todo]
+        del st.session_state[f"{checkbox_counter}_{todo}"]
         st.experimental_rerun()
+    checkbox_counter += 1
 
 
 st.text_input(label="Add a new To-Do", placeholder="Enter a To-Do...",
